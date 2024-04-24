@@ -6,7 +6,7 @@ import 'widget_padding.dart';
 
 part 'widget_layout.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith(copyWithNull: true)
 
 /// [Build Area] [Core Application] [Core] | [Models] [Widget]: WidgetLayouts

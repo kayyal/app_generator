@@ -6,7 +6,7 @@ import 'text_rgb_color.dart';
 
 part 'text_style_info.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith(copyWithNull: true)
 class TextStyleInfo {
   final TextRGBColor color;

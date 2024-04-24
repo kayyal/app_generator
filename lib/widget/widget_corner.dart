@@ -4,7 +4,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 
 part 'widget_corner.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith(copyWithNull: true)
 
 /// [Build Area] [Core Application] [Core] | [Models] [Widget]: Corner

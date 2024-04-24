@@ -7,7 +7,7 @@ import 'text_style_info.dart';
 
 part 'text_info.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith(copyWithNull: true)
 class TextInfo {
   final TextContent content;

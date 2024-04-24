@@ -8,7 +8,7 @@ import 'widget_shadow.dart';
 
 part 'widget_style.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith(copyWithNull: true)
 class WidgetStyle {
   WidgetRgbColor color;

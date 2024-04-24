@@ -9,7 +9,7 @@ import 'widget_style.dart';
 
 part 'widget_info.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith()
 class WidgetInfo {
   final String key;

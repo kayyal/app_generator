@@ -6,7 +6,7 @@ import 'widget_rgb_color.dart';
 
 part 'widget_shadow.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 @CopyWith(copyWithNull: true)
 class WidgetShadow {
   double blurRadius;
@@ -18,7 +18,7 @@ class WidgetShadow {
 
   WidgetShadow(
       {required this.blurRadius,
-      required this.blurStyle,
+      this.blurStyle = 0,
       required this.color,
       required this.offsetX,
       required this.offsetY,
