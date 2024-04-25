@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gold_cherry_app_generator/json_string.dart';
 import 'package:gold_cherry_app_generator/widget/widget_info.dart';
+import 'package:gold_cherry_app_generator/text/text_style_info.dart';
 
 class MyWidgetScreen extends StatelessWidget {
-  final String jsonString = JsonString.nestedJson3;
+  final String jsonString = JsonString.nestedJson4;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,9 @@ class MyWidgetScreen extends StatelessWidget {
 }
 
 Widget createWidget(WidgetInfo widgetInfo) {
+  Alignment alignment =
+      widgetInfo.alignedWithParent?.toAlignment() ?? Alignment.center;
+  print("alignment >>> ${alignment}");
   return Positioned(
     left: widgetInfo.widgetLayout.dx,
     top: widgetInfo.widgetLayout.dy,
@@ -38,6 +42,7 @@ Widget createWidget(WidgetInfo widgetInfo) {
     child: Container(
       width: widgetInfo.widgetLayout.width,
       height: widgetInfo.widgetLayout.height,
+      alignment: alignment,
       decoration: BoxDecoration(
         color: Color.fromRGBO(
           widgetInfo.widgetStyle.color.r,
@@ -67,8 +72,8 @@ Widget createWidget(WidgetInfo widgetInfo) {
         }).toList(),
       ),
       child: widgetInfo.textInfo != null
-          ? Center(
-              child: Text(
+          ? Stack(children: [
+              Text(
                 widgetInfo.textInfo!.content.text,
                 style: TextStyle(
                   color: Color.fromRGBO(
@@ -85,7 +90,7 @@ Widget createWidget(WidgetInfo widgetInfo) {
                       : TextDecoration.none,
                 ),
               ),
-            )
+            ])
           : null,
     ),
   );
@@ -111,26 +116,4 @@ List<Widget> createFlutterWidgets(List<WidgetInfo> widgetInfos) {
   }
 
   return widgets;
-}
-
-FontWeight calculateFontWeight(double weight) {
-  if (weight <= 100) {
-    return FontWeight.w100;
-  } else if (weight <= 200) {
-    return FontWeight.w200;
-  } else if (weight <= 300) {
-    return FontWeight.w300;
-  } else if (weight <= 400) {
-    return FontWeight.w400;
-  } else if (weight <= 500) {
-    return FontWeight.w500;
-  } else if (weight <= 600) {
-    return FontWeight.w600;
-  } else if (weight <= 700) {
-    return FontWeight.w700;
-  } else if (weight <= 800) {
-    return FontWeight.w800;
-  } else {
-    return FontWeight.w900;
-  }
 }
