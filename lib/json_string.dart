@@ -409,18 +409,18 @@ class JsonString {
   
   ''';
 
-  static String nestedJson4 = '''
+  static String nestedJson5 = '''
   
 [
   {
     "key": "widget1",
     "widgetLayout": {
-      "dx": 0.25,
-      "dy": 0.25,
-      "height": 200.0,
-      "width": 200.0,
-      "isAbsolutePosition": false,
-      "isAbsoluteSize": false,
+      "dx": 224,
+      "dy": 234,
+      "height": 245,
+      "width": 254,
+      "isAbsolutePosition": true,
+      "isAbsoluteSize": true,
       "padding": {}
     },
     "widgetStyle": {
@@ -454,26 +454,26 @@ class JsonString {
       }
     },
     "alignedWithParent": {
-      "x": 0.0,
+      "x": 1.0,
       "y": 1.0
     },
     "children": [
       {
         "key": "widget2",
         "widgetLayout": {
-          "dx": 0.1,
-          "dy": 0.1,
-          "height": 60.0,
-          "width": 60.0,
-          "isAbsolutePosition": false,
-          "isAbsoluteSize": false,
+          "dx": 0,
+          "dy": 0,
+          "height": 46,
+          "width": 65,
+          "isAbsolutePosition": true,
+          "isAbsoluteSize": true,
           "padding": {}
         },
         "widgetStyle": {
           "color": {
-            "r": 0,
-            "g": 255,
-            "b": 0,
+            "r": 123,
+            "g": 23,
+            "b": 56,
             "opacity": 1
           },
           "corner": {
@@ -490,7 +490,7 @@ class JsonString {
           },
           "style": {
             "color": {
-              "r": 255,
+              "r": 125,
               "g": 0,
               "b": 255
             },
@@ -505,12 +505,12 @@ class JsonString {
   {
     "key": "widget3",
     "widgetLayout": {
-      "dx": 0.5,
-      "dy": 0.5,
-      "height": 100.0,
-      "width": 100.0,
-      "isAbsolutePosition": false,
-      "isAbsoluteSize": false,
+      "dx": 0,
+      "dy": 0,
+      "height": 123,
+      "width": 132,
+      "isAbsolutePosition": true,
+      "isAbsoluteSize": true,
       "padding": {}
     },
     "widgetStyle": {
@@ -544,13 +544,207 @@ class JsonString {
       }
     },
     "alignedWithParent": {
-      "x": 0,
+      "x": -1.0,
       "y": -1.0
     }
   }
 ]
-
-
-  
   ''';
+
+  static String nestedJson6 = '''
+
+[
+ {
+    "key": "widget1",
+    "widgetLayout": {
+      "dx": 224,
+      "dy": 234,
+      "height": 245,
+      "width": 254,
+      "isAbsolutePosition": true,
+      "isAbsoluteSize": true,
+      "padding": {}
+    },
+    "widgetStyle": {
+      "color": {
+        "r": 255,
+        "g": 0,
+        "b": 0,
+        "opacity": 1
+      },
+      "corner": {
+        "topRight": 20.0,
+        "topLeft": 20.0,
+        "bottomRight": 0.0,
+        "bottomLeft": 0.0
+      },
+      "shadows": []
+    },
+    "textInfo": {
+      "content": {
+        "text": "Hello"
+      },
+      "style": {
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 255
+        },
+        "size": 16.0,
+        "weight": 400,
+        "underline": false
+      }
+    },
+    "alignedWithParent": {
+      "x": 1.0,
+      "y": 1.0
+    },
+    "children": [
+      {
+        "key": "child1",
+        "children": [
+          {
+            "key": "grandchild1",
+            "widgetLayout": {
+              "dx": 0,
+              "dy": 0,
+              "height": 46,
+              "width": 65,
+              "isAbsolutePosition": true,
+              "isAbsoluteSize": true,
+              "padding": {}
+            },
+            "widgetStyle": {
+              "color": {
+                "r": 123,
+                "g": 23,
+                "b": 56,
+                "opacity": 1
+              },
+              "corner": {
+                "topRight": 10.0,
+                "topLeft": 10.0,
+                "bottomRight": 0.0,
+                "bottomLeft": 0.0
+              },
+              "shadows": []
+            },
+            "textInfo": {
+              "content": {
+                "text": "Grandchild 1"
+              },
+              "style": {
+                "color": {
+                 "r": 125,
+                 "g": 0,
+                 "b": 255
+                },
+                "size": 14.0,
+                "weight": 700,
+                "underline": true
+              }
+            }
+          }
+        ]
+      }
+    ]
+ },
+ {
+    "key": "widget2",
+    "widgetLayout": {
+      "dx": 0,
+      "dy": 0,
+      "height": 123,
+      "width": 132,
+      "isAbsolutePosition": true,
+      "isAbsoluteSize": true,
+      "padding": {}
+    },
+    "widgetStyle": {
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 255,
+        "opacity": 1
+      },
+      "corner": {
+        "topRight": 0.0,
+        "topLeft": 0.0,
+        "bottomRight": 20.0,
+        "bottomLeft": 20.0
+      },
+      "shadows": []
+    },
+    "textInfo": {
+      "content": {
+        "text": "Flutter"
+      },
+      "style": {
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 0
+        },
+        "size": 18.0,
+        "weight": 600,
+        "underline": false
+      }
+    },
+    "alignedWithParent": {
+      "x": -1.0,
+      "y": -1.0
+    },
+    "children": [
+      {
+        "key": "child2",
+        "children": [
+          {
+            "key": "grandchild2",
+            "widgetLayout": {
+              "dx": 0,
+              "dy": 0,
+              "height": 46,
+              "width": 65,
+              "isAbsolutePosition": true,
+              "isAbsoluteSize": true,
+              "padding": {}
+            },
+            "widgetStyle": {
+              "color": {
+                "r": 123,
+                "g": 23,
+                "b": 56,
+                "opacity": 1
+              },
+              "corner": {
+                "topRight": 10.0,
+                "topLeft": 10.0,
+                "bottomRight": 0.0,
+                "bottomLeft": 0.0
+              },
+              "shadows": []
+            },
+            "textInfo": {
+              "content": {
+                "text": "Grandchild 2"
+              },
+              "style": {
+                "color": {
+                 "r": 125,
+                 "g": 0,
+                 "b": 255
+                },
+                "size": 14.0,
+                "weight": 700,
+                "underline": true
+              }
+            }
+          }
+        ]
+      }
+    ]
+ }
+]
+
+ ''';
 }

@@ -5,12 +5,12 @@ import 'package:gold_cherry_app_generator/widget/widget_info.dart';
 import 'package:gold_cherry_app_generator/text/text_style_info.dart';
 
 class MyWidgetScreen extends StatelessWidget {
-  final String jsonString = JsonString.nestedJson4;
+  final String jsonString = JsonString.nestedJson;
 
   @override
   Widget build(BuildContext context) {
     List<WidgetInfo> widgetInfos = parseWidgets(jsonString);
-    List<Widget> flutterWidgets = createFlutterWidgets(widgetInfos);
+    List<Widget> flutterWidgets = createFlutterWidgets(widgetInfos, context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -30,19 +30,25 @@ class MyWidgetScreen extends StatelessWidget {
   }
 }
 
-Widget createWidget(WidgetInfo widgetInfo) {
-  Alignment alignment =
-      widgetInfo.alignedWithParent?.toAlignment() ?? Alignment.center;
-  print("alignment >>> ${alignment}");
+Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
   return Positioned(
-    left: widgetInfo.widgetLayout.dx,
-    top: widgetInfo.widgetLayout.dy,
-    width: widgetInfo.widgetLayout.width,
-    height: widgetInfo.widgetLayout.height,
+    left: widgetInfo.widgetLayout.isAbsolutePosition
+        ? widgetInfo.widgetLayout.dx
+        : widgetInfo.widgetLayout.dx * MediaQuery.of(context).size.width,
+    top: widgetInfo.widgetLayout.isAbsolutePosition
+        ? widgetInfo.widgetLayout.dy
+        : widgetInfo.widgetLayout.dy * MediaQuery.of(context).size.height,
+    // width: widthV,
+    // height: widthV,
     child: Container(
-      width: widgetInfo.widgetLayout.width,
-      height: widgetInfo.widgetLayout.height,
-      alignment: alignment,
+      width: widgetInfo.widgetLayout.isAbsoluteSize
+          ? widgetInfo.widgetLayout.width
+          : widgetInfo.widgetLayout.width * MediaQuery.of(context).size.width,
+      height: widgetInfo.widgetLayout.isAbsoluteSize
+          ? widgetInfo.widgetLayout.height
+          : widgetInfo.widgetLayout.height * MediaQuery.of(context).size.height,
+      alignment:
+          widgetInfo.alignedWithParent?.toAlignment() ?? Alignment.center,
       decoration: BoxDecoration(
         color: Color.fromRGBO(
           widgetInfo.widgetStyle.color.r,
@@ -72,48 +78,40 @@ Widget createWidget(WidgetInfo widgetInfo) {
         }).toList(),
       ),
       child: widgetInfo.textInfo != null
-          ? Stack(children: [
-              Text(
-                widgetInfo.textInfo!.content.text,
-                style: TextStyle(
-                  color: Color.fromRGBO(
-                    widgetInfo.textInfo!.style.color.r,
-                    widgetInfo.textInfo!.style.color.g,
-                    widgetInfo.textInfo!.style.color.b,
-                    1.0,
-                  ),
-                  fontSize: widgetInfo.textInfo!.style.size,
-                  fontWeight:
-                      calculateFontWeight(widgetInfo.textInfo!.style.weight),
-                  decoration: widgetInfo.textInfo!.style.underline
-                      ? TextDecoration.underline
-                      : TextDecoration.none,
+          ? Text(
+              widgetInfo.textInfo!.content.text,
+              style: TextStyle(
+                color: Color.fromRGBO(
+                  widgetInfo.textInfo!.style.color.r,
+                  widgetInfo.textInfo!.style.color.g,
+                  widgetInfo.textInfo!.style.color.b,
+                  1.0,
                 ),
+                fontSize: widgetInfo.textInfo!.style.size,
+                fontWeight:
+                    calculateFontWeight(widgetInfo.textInfo!.style.weight),
+                decoration: widgetInfo.textInfo!.style.underline
+                    ? TextDecoration.underline
+                    : TextDecoration.none,
               ),
-            ])
-          : null,
+            )
+          : widgetInfo.children != null
+              ? Stack(
+                  children: <Widget>[
+                    ...createFlutterWidgets(widgetInfo.children!, context),
+                  ],
+                )
+              : null,
     ),
   );
 }
 
-List<Widget> createFlutterWidgets(List<WidgetInfo> widgetInfos) {
+List<Widget> createFlutterWidgets(
+    List<WidgetInfo> widgetInfos, BuildContext context) {
   List<Widget> widgets = [];
-
   for (var widgetInfo in widgetInfos) {
-    Widget widget = createWidget(widgetInfo);
-
-    if (widgetInfo.children != null) {
-      List<Widget> nestedWidgets = createFlutterWidgets(widgetInfo.children!);
-      widget = Stack(
-        children: [
-          widget,
-          ...nestedWidgets,
-        ],
-      );
-    }
-
+    Widget widget = createWidget(widgetInfo, context);
     widgets.add(widget);
   }
-
   return widgets;
 }
