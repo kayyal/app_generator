@@ -5,7 +5,7 @@ import 'package:gold_cherry_app_generator/widget/widget_info.dart';
 import 'package:gold_cherry_app_generator/text/text_style_info.dart';
 
 class MyWidgetScreen extends StatelessWidget {
-  final String jsonString = JsonString.nestedJson;
+  final String jsonString = JsonString.nestedJson6;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class MyWidgetScreen extends StatelessWidget {
 }
 
 Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
+  var alignedWithParent = widgetInfo.alignedWithParent;
   return Positioned(
     left: widgetInfo.widgetLayout.isAbsolutePosition
         ? widgetInfo.widgetLayout.dx
@@ -47,8 +48,7 @@ Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
       height: widgetInfo.widgetLayout.isAbsoluteSize
           ? widgetInfo.widgetLayout.height
           : widgetInfo.widgetLayout.height * MediaQuery.of(context).size.height,
-      alignment:
-          widgetInfo.alignedWithParent?.toAlignment() ?? Alignment.center,
+      alignment: alignedWithParent?.toAlignment() ?? Alignment.center,
       decoration: BoxDecoration(
         color: Color.fromRGBO(
           widgetInfo.widgetStyle.color.r,
@@ -77,31 +77,37 @@ Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
           );
         }).toList(),
       ),
-      child: widgetInfo.textInfo != null
-          ? Text(
-              widgetInfo.textInfo!.content.text,
-              style: TextStyle(
-                color: Color.fromRGBO(
-                  widgetInfo.textInfo!.style.color.r,
-                  widgetInfo.textInfo!.style.color.g,
-                  widgetInfo.textInfo!.style.color.b,
-                  1.0,
+      child: Stack(
+        children: <Widget>[
+          if (widgetInfo.textInfo != null)
+            Container(
+              alignment: alignedWithParent?.toAlignment() ?? Alignment.center,
+              child: Text(
+                widgetInfo.textInfo!.content.text,
+                style: TextStyle(
+                  color: Color.fromRGBO(
+                    widgetInfo.textInfo!.style.color.r,
+                    widgetInfo.textInfo!.style.color.g,
+                    widgetInfo.textInfo!.style.color.b,
+                    1.0,
+                  ),
+                  fontSize: widgetInfo.textInfo!.style.size,
+                  fontWeight:
+                      calculateFontWeight(widgetInfo.textInfo!.style.weight),
+                  decoration: widgetInfo.textInfo!.style.underline
+                      ? TextDecoration.underline
+                      : TextDecoration.none,
                 ),
-                fontSize: widgetInfo.textInfo!.style.size,
-                fontWeight:
-                    calculateFontWeight(widgetInfo.textInfo!.style.weight),
-                decoration: widgetInfo.textInfo!.style.underline
-                    ? TextDecoration.underline
-                    : TextDecoration.none,
               ),
-            )
-          : widgetInfo.children != null
-              ? Stack(
-                  children: <Widget>[
-                    ...createFlutterWidgets(widgetInfo.children!, context),
-                  ],
-                )
-              : null,
+            ),
+          if (widgetInfo.children != null)
+            Stack(
+              children: <Widget>[
+                ...createFlutterWidgets(widgetInfo.children!, context),
+              ],
+            ),
+        ],
+      ),
     ),
   );
 }
