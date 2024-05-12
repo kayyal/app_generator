@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gold_cherry_app_generator/json_string.dart';
 import 'package:gold_cherry_app_generator/widget/widget_info.dart';
 import 'package:gold_cherry_app_generator/text/text_style_info.dart';
+import 'build_widget.dart';
 
 class MyWidgetScreen extends StatelessWidget {
   final String jsonString = JsonString.nestedJson6;
@@ -82,23 +83,7 @@ Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
           if (widgetInfo.textInfo != null)
             Container(
               alignment: alignedWithParent?.toAlignment() ?? Alignment.center,
-              child: Text(
-                widgetInfo.textInfo!.content.text,
-                style: TextStyle(
-                  color: Color.fromRGBO(
-                    widgetInfo.textInfo!.style.color.r,
-                    widgetInfo.textInfo!.style.color.g,
-                    widgetInfo.textInfo!.style.color.b,
-                    1.0,
-                  ),
-                  fontSize: widgetInfo.textInfo!.style.size,
-                  fontWeight:
-                      calculateFontWeight(widgetInfo.textInfo!.style.weight),
-                  decoration: widgetInfo.textInfo!.style.underline
-                      ? TextDecoration.underline
-                      : TextDecoration.none,
-                ),
-              ),
+              child: buildTextWidget(widgetInfo.textInfo),
             ),
           if (widgetInfo.children != null)
             Stack(
