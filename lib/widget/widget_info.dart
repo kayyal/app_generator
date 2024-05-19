@@ -1,6 +1,5 @@
 // ignore: depend_on_referenced_packages
 import 'package:gold_cherry_app_generator/widget/alignment_to_parent.dart';
-import 'package:gold_cherry_app_generator/widget_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 
