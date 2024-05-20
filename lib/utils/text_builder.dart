@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gold_cherry_app_generator/text/text_info.dart';
 import 'package:gold_cherry_app_generator/text/text_style_info.dart';
+import 'package:get/get.dart';
 
-class TextBuilder {
-  static Widget buildTextWidget(TextInfo? textInfo) {
+class TextBuilder extends GetxController {
+  Widget buildTextWidget(TextInfo? textInfo) {
     if (textInfo != null) {
       return Text(
         textInfo.content.text,

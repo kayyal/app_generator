@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gold_cherry_app_generator/widget/widget_info.dart';
-import 'package:gold_cherry_app_generator/widget/widget_style.dart';
 
-class DecorationBuilder {
-  static BoxDecoration build(WidgetInfo widgetInfo) {
+class DecorationBuilder extends GetxController {
+  BoxDecoration build(WidgetInfo widgetInfo) {
     return BoxDecoration(
       color: Color.fromRGBO(
         widgetInfo.widgetStyle.color.r,
@@ -17,7 +17,7 @@ class DecorationBuilder {
         bottomLeft: Radius.circular(widgetInfo.widgetStyle.corner.bottomLeft),
         bottomRight: Radius.circular(widgetInfo.widgetStyle.corner.bottomRight),
       ),
-      // the corderColor must be added to the widgetStyle
+      // the borderColor must be added to the widgetStyle
       // border: Border.all(
       //   color: Color.fromRGBO(
       //     widgetInfo.widgetStyle.borderColor.r,
