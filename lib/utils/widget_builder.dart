@@ -16,12 +16,9 @@ class WidgetBuilderr extends GetxController {
 
   List<Widget> createFlutterWidgets(
       List<WidgetInfo> widgetInfos, BuildContext context) {
-    List<Widget> widgets = [];
-    for (var widgetInfo in widgetInfos) {
-      Widget widget = createWidget(widgetInfo, context);
-      widgets.add(widget);
-    }
-    return widgets;
+    return widgetInfos
+        .map((widgetInfo) => createWidget(widgetInfo, context))
+        .toList();
   }
 
   Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
@@ -38,21 +35,23 @@ class WidgetBuilderr extends GetxController {
       height: sizeCalculator.calculateHeight(widgetInfo, context),
       alignment: alignmentCalculator.calculate(widgetInfo),
       decoration: decorationBuilder.build(widgetInfo),
-      child: Stack(
-        children: <Widget>[
-          if (widgetInfo.textInfo != null)
-            Container(
-              alignment: alignmentCalculator.calculate(widgetInfo),
-              child: textBuilder.buildTextWidget(widgetInfo.textInfo),
-            ),
-          if (widgetInfo.children != null)
-            Stack(
-              children: <Widget>[
-                ...createFlutterWidgets(widgetInfo.children!, context),
-              ],
-            ),
-        ],
-      ),
+      child: _buildContainerChildren(widgetInfo, context),
     );
+  }
+
+  Widget _buildContainerChildren(WidgetInfo widgetInfo, BuildContext context) {
+    List<Widget> children = [];
+    if (widgetInfo.textInfo != null) {
+      children.add(Container(
+        alignment: alignmentCalculator.calculate(widgetInfo),
+        child: textBuilder.buildTextWidget(widgetInfo.textInfo!),
+      ));
+    }
+    if (widgetInfo.children != null) {
+      children.add(Stack(
+        children: createFlutterWidgets(widgetInfo.children!, context),
+      ));
+    }
+    return Stack(children: children);
   }
 }
