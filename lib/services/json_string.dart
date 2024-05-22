@@ -783,15 +783,15 @@ class JsonString {
 
   static String nestedJson7 = '''
 [
- {
+  {
     "key": "widget1",
     "widgetLayout": {
-      "dx": 0.3,
-      "dy": 0.4 ,
-      "height": 0.4,
-      "width": 0.5,
-      "isAbsolutePosition": false,
-      "isAbsoluteSize": false,
+      "dx": 224,
+      "dy": 234,
+      "height": 245,
+      "width": 254,
+      "isAbsolutePosition": true,
+      "isAbsoluteSize": true,
       "padding": {}
     },
     "widgetStyle": {
@@ -802,10 +802,10 @@ class JsonString {
         "opacity": 1
       },
       "corner": {
-        "topRight": 20.0,
-        "topLeft": 20.0,
-        "bottomRight": 0.0,
-        "bottomLeft": 0.0
+        "topRight": 20,
+        "topLeft": 20,
+        "bottomRight": 0,
+        "bottomLeft": 0
       },
       "shadows": []
     },
@@ -819,14 +819,14 @@ class JsonString {
           "g": 0,
           "b": 255
         },
-        "size": 16.0,
+        "size": 16,
         "weight": 400,
         "underline": false
       }
     },
     "alignedWithParent": {
-      "x": 0.0,
-      "y": 0.0
+      "x": 1,
+      "y": 1
     },
     "children": [
       {
@@ -842,22 +842,23 @@ class JsonString {
         },
         "widgetStyle": {
           "color": {
-            "r": 155,
+            "r": 255,
             "g": 0,
             "b": 0,
             "opacity": 1
           }
         },
+        "widgetType": "container",
         "children": [
           {
             "key": "grandchild1",
             "widgetLayout": {
-              "dx": 0.23,
-              "dy": 0.23,
-              "height": 1,
-              "width": 1,
-              "isAbsolutePosition": false,
-              "isAbsoluteSize": false,
+              "dx": 0,
+              "dy": 0,
+              "height": 46,
+              "width": 65,
+              "isAbsolutePosition": true,
+              "isAbsoluteSize": true,
               "padding": {}
             },
             "widgetStyle": {
@@ -868,10 +869,10 @@ class JsonString {
                 "opacity": 1
               },
               "corner": {
-                "topRight": 10.0,
-                "topLeft": 10.0,
-                "bottomRight": 0.0,
-                "bottomLeft": 0.0
+                "topRight": 10,
+                "topLeft": 10,
+                "bottomRight": 0,
+                "bottomLeft": 0
               },
               "shadows": []
             },
@@ -881,29 +882,31 @@ class JsonString {
               },
               "style": {
                 "color": {
-                 "r": 125,
-                 "g": 0,
-                 "b": 255
+                  "r": 125,
+                  "g": 0,
+                  "b": 255
                 },
-                "size": 14.0,
+                "size": 14,
                 "weight": 700,
                 "underline": true
               }
-            }
+            },
+            "widgetType": "text"
           }
         ]
       }
-    ]
- },
- {
+    ],
+    "widgetType": "container"
+  },
+  {
     "key": "widget2",
     "widgetLayout": {
-      "dx": 0.1,
-      "dy": 0.2,
-      "height": 0.2,
-      "width": 0.15,
-      "isAbsolutePosition": false,
-      "isAbsoluteSize": false,
+      "dx": 0,
+      "dy": 0,
+      "height": 123,
+      "width": 132,
+      "isAbsolutePosition": true,
+      "isAbsoluteSize": true,
       "padding": {}
     },
     "widgetStyle": {
@@ -914,10 +917,10 @@ class JsonString {
         "opacity": 1
       },
       "corner": {
-        "topRight": 0.0,
-        "topLeft": 0.0,
-        "bottomRight": 20.0,
-        "bottomLeft": 20.0
+        "topRight": 0,
+        "topLeft": 0,
+        "bottomRight": 20,
+        "bottomLeft": 20
       },
       "shadows": []
     },
@@ -931,14 +934,14 @@ class JsonString {
           "g": 255,
           "b": 0
         },
-        "size": 18.0,
+        "size": 18,
         "weight": 600,
         "underline": false
       }
     },
     "alignedWithParent": {
-      "x": 0.0,
-      "y": 0.0
+      "x": -1,
+      "y": -1
     },
     "children": [
       {
@@ -960,6 +963,7 @@ class JsonString {
             "opacity": 1
           }
         },
+        "widgetType": "container",
         "children": [
           {
             "key": "grandchild2",
@@ -968,8 +972,8 @@ class JsonString {
               "dy": 0,
               "height": 46,
               "width": 65,
-              "isAbsolutePosition": false,
-              "isAbsoluteSize": false,
+              "isAbsolutePosition": true,
+              "isAbsoluteSize": true,
               "padding": {}
             },
             "widgetStyle": {
@@ -980,10 +984,10 @@ class JsonString {
                 "opacity": 1
               },
               "corner": {
-                "topRight": 10.0,
-                "topLeft": 10.0,
-                "bottomRight": 0.0,
-                "bottomLeft": 0.0
+                "topRight": 10,
+                "topLeft": 10,
+                "bottomRight": 0,
+                "bottomLeft": 0
               },
               "shadows": []
             },
@@ -993,22 +997,23 @@ class JsonString {
               },
               "style": {
                 "color": {
-                 "r": 125,
-                 "g": 0,
-                 "b": 255
+                  "r": 125,
+                  "g": 0,
+                  "b": 255
                 },
-                "size": 14.0,
+                "size": 14,
                 "weight": 700,
                 "underline": true
               }
-            }
+            },
+            "widgetType": "text"
           }
         ]
       }
-    ]
- }
+    ],
+    "widgetType": "container"
+  }
 ]
-
 
  ''';
 }

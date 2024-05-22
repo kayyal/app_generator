@@ -1,5 +1,5 @@
 enum WidgetType {
-  Text,
-  Container,
-  Button,
+  text,
+  container,
+  button,
 }

@@ -6,6 +6,7 @@ import 'package:gold_cherry_app_generator/utils/position_calculator.dart';
 import 'package:gold_cherry_app_generator/utils/decoration_builder.dart';
 import 'package:gold_cherry_app_generator/utils/size_calculator.dart';
 import 'package:gold_cherry_app_generator/utils/alignment_calculator.dart';
+import 'package:gold_cherry_app_generator/widget_type.dart';
 
 class WidgetBuilderr extends GetxController {
   final AlignmentCalculator alignmentCalculator = Get.find();
@@ -22,10 +23,31 @@ class WidgetBuilderr extends GetxController {
   }
 
   Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
+    Widget childWidget;
+
+    switch (widgetInfo.widgetType) {
+      case WidgetType.container:
+        childWidget = _buildContainer(widgetInfo, context);
+        break;
+      case WidgetType.text:
+        childWidget = _buildText(widgetInfo, context);
+        break;
+      case WidgetType.button:
+        childWidget = _buildButton(widgetInfo, context);
+        break;
+      default:
+        childWidget = const SizedBox.shrink();
+    }
+
+    return _positionedWidget(widgetInfo, context, childWidget);
+  }
+
+  Widget _positionedWidget(
+      WidgetInfo widgetInfo, BuildContext context, Widget child) {
     return Positioned(
       left: positionCalculator.calculateLeft(widgetInfo, context),
       top: positionCalculator.calculateTop(widgetInfo, context),
-      child: _buildContainer(widgetInfo, context),
+      child: child,
     );
   }
 
@@ -53,5 +75,24 @@ class WidgetBuilderr extends GetxController {
       ));
     }
     return Stack(children: children);
+  }
+
+// this methos is incomplete
+  Widget _buildText(WidgetInfo widgetInfo, BuildContext context) {
+    return Container(
+      alignment: alignmentCalculator.calculate(widgetInfo),
+      child: textBuilder.buildTextWidget(widgetInfo.textInfo!),
+    );
+  }
+
+//this method is incomplete
+  Widget _buildButton(WidgetInfo widgetInfo, BuildContext context) {
+    // Example button, customize as needed
+    return ElevatedButton(
+      onPressed: () {
+        // Handle button press
+      },
+      child: Text((widgetInfo.textInfo ?? 'Button') as String),
+    );
   }
 }

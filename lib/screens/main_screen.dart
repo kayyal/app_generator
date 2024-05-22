@@ -8,7 +8,7 @@ import 'package:gold_cherry_app_generator/utils/widget_builder.dart';
 class MainScreen extends StatelessWidget {
   final WidgetParser widgetParser = Get.find();
   final WidgetBuilderr widgetBuilder = Get.find();
-  final String jsonString = JsonString.nestedJson6;
+  final String jsonString = JsonString.nestedJson7;
 
   @override
   Widget build(BuildContext context) {

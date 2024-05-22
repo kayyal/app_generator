@@ -2,6 +2,7 @@
 import 'package:gold_cherry_app_generator/widget/alignment_to_parent.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:gold_cherry_app_generator/widget_type.dart';
 
 import '../text/text_info.dart';
 import 'widget_image.dart';
@@ -20,6 +21,7 @@ class WidgetInfo {
   WidgetImage? image;
   AlignmentToParent? alignedWithParent;
   List<WidgetInfo>? children;
+  final WidgetType widgetType;
   // button up  / for figureing out the touchable info
 
   WidgetInfo({
@@ -29,6 +31,7 @@ class WidgetInfo {
     this.textInfo,
     this.children,
     this.alignedWithParent,
+    required this.widgetType,
   });
 
   factory WidgetInfo.fromJson(Map<String, dynamic> json) =>
