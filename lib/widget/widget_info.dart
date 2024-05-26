@@ -1,4 +1,5 @@
 // ignore: depend_on_referenced_packages
+import 'package:gold_cherry_app_generator/button/button_info.dart';
 import 'package:gold_cherry_app_generator/widget/alignment_to_parent.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
@@ -15,23 +16,25 @@ part 'widget_info.g.dart';
 @CopyWith()
 class WidgetInfo {
   final String key;
+  final WidgetType widgetType;
   WidgetLayout widgetLayout;
   WidgetStyle widgetStyle;
   TextInfo? textInfo;
+  ButtonInfo? buttonInfo;
   WidgetImage? image;
   AlignmentToParent? alignedWithParent;
   List<WidgetInfo>? children;
-  final WidgetType widgetType;
   // button up  / for figureing out the touchable info
 
   WidgetInfo({
     required this.key,
+    required this.widgetType,
     required this.widgetLayout,
     required this.widgetStyle,
     this.textInfo,
+    this.buttonInfo,
     this.children,
     this.alignedWithParent,
-    required this.widgetType,
   });
 
   factory WidgetInfo.fromJson(Map<String, dynamic> json) =>

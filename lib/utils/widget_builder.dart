@@ -1,5 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gold_cherry_app_generator/button/button_info.dart';
+import 'package:gold_cherry_app_generator/utils/button_builder.dart';
 import 'package:gold_cherry_app_generator/utils/text_builder.dart';
 import 'package:gold_cherry_app_generator/widget/widget_info.dart';
 import 'package:gold_cherry_app_generator/utils/position_calculator.dart';
@@ -14,6 +17,7 @@ class WidgetBuilderr extends GetxController {
   final PositionCalculator positionCalculator = Get.find();
   final SizeCalculator sizeCalculator = Get.find();
   final TextBuilder textBuilder = Get.find();
+  ButtonBuilder buttonBuilder = Get.find();
 
   List<Widget> createFlutterWidgets(
       List<WidgetInfo> widgetInfos, BuildContext context) {
@@ -24,7 +28,6 @@ class WidgetBuilderr extends GetxController {
 
   Widget createWidget(WidgetInfo widgetInfo, BuildContext context) {
     Widget childWidget;
-
     switch (widgetInfo.widgetType) {
       case WidgetType.container:
         childWidget = _buildContainer(widgetInfo, context);
@@ -33,7 +36,7 @@ class WidgetBuilderr extends GetxController {
         childWidget = _buildText(widgetInfo, context);
         break;
       case WidgetType.button:
-        childWidget = _buildButton(widgetInfo, context);
+        childWidget = buttonBuilder.buildButton(widgetInfo, context);
         break;
       default:
         childWidget = const SizedBox.shrink();
@@ -63,12 +66,6 @@ class WidgetBuilderr extends GetxController {
 
   Widget _buildContainerChildren(WidgetInfo widgetInfo, BuildContext context) {
     List<Widget> children = [];
-    if (widgetInfo.textInfo != null) {
-      children.add(Container(
-        alignment: alignmentCalculator.calculate(widgetInfo),
-        child: textBuilder.buildTextWidget(widgetInfo.textInfo!),
-      ));
-    }
     if (widgetInfo.children != null) {
       children.add(Stack(
         children: createFlutterWidgets(widgetInfo.children!, context),
@@ -82,17 +79,6 @@ class WidgetBuilderr extends GetxController {
     return Container(
       alignment: alignmentCalculator.calculate(widgetInfo),
       child: textBuilder.buildTextWidget(widgetInfo.textInfo!),
-    );
-  }
-
-//this method is incomplete
-  Widget _buildButton(WidgetInfo widgetInfo, BuildContext context) {
-    // Example button, customize as needed
-    return ElevatedButton(
-      onPressed: () {
-        // Handle button press
-      },
-      child: Text((widgetInfo.textInfo ?? 'Button') as String),
     );
   }
 }
