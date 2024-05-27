@@ -8,21 +8,21 @@ class ButtonBuilder extends GetxController {
     if (widgetInfo.buttonInfo == null) {
       return const SizedBox.shrink();
     }
-
-    return ElevatedButton(
-      style: _buildButtonStyle(widgetInfo),
-      onPressed: _getOnPressedCallback(widgetInfo.buttonInfo!),
-      child: _buildButtonText(widgetInfo),
+    return InkWell(
+      onTap: _getOnPressedCallback(widgetInfo.buttonInfo!),
+      child: Container(
+        decoration: _buildBoxDecoration(widgetInfo),
+        padding: _getButtonPadding(widgetInfo),
+        child: Center(child: _buildButtonText(widgetInfo)),
+      ),
     );
   }
 
-  ButtonStyle _buildButtonStyle(WidgetInfo widgetInfo) {
-    return ElevatedButton.styleFrom(
-      backgroundColor: _getButtonColor(widgetInfo),
-      padding: _getButtonPadding(widgetInfo),
-      shape: RoundedRectangleBorder(borderRadius: _getBorderRadius(widgetInfo)),
-      shadowColor: _getBoxShadowColor(widgetInfo),
-      elevation: _getBoxShadowElevation(widgetInfo),
+  BoxDecoration _buildBoxDecoration(WidgetInfo widgetInfo) {
+    return BoxDecoration(
+      color: _getButtonColor(widgetInfo),
+      borderRadius: _getBorderRadius(widgetInfo),
+      boxShadow: _getBoxShadows(widgetInfo),
     );
   }
 
@@ -53,30 +53,34 @@ class ButtonBuilder extends GetxController {
     );
   }
 
-  Color? _getBoxShadowColor(WidgetInfo widgetInfo) {
-    if (widgetInfo.widgetStyle.shadows.isEmpty) return null;
-    return Color.fromRGBO(
-      widgetInfo.widgetStyle.shadows[0].color.r,
-      widgetInfo.widgetStyle.shadows[0].color.g,
-      widgetInfo.widgetStyle.shadows[0].color.b,
-      widgetInfo.widgetStyle.shadows[0].color.opacity,
-    );
-  }
-
-  double _getBoxShadowElevation(WidgetInfo widgetInfo) {
-    if (widgetInfo.widgetStyle.shadows.isEmpty) return 0;
-    return widgetInfo.widgetStyle.shadows[0].blurRadius;
+  List<BoxShadow> _getBoxShadows(WidgetInfo widgetInfo) {
+    if (widgetInfo.widgetStyle.shadows.isEmpty) return [];
+    return [
+      BoxShadow(
+        color: Color.fromRGBO(
+          widgetInfo.widgetStyle.shadows[0].color.r,
+          widgetInfo.widgetStyle.shadows[0].color.g,
+          widgetInfo.widgetStyle.shadows[0].color.b,
+          widgetInfo.widgetStyle.shadows[0].color.opacity,
+        ),
+        blurRadius: widgetInfo.widgetStyle.shadows[0].blurRadius,
+        offset: Offset(
+          widgetInfo.widgetStyle.shadows[0].offsetX,
+          widgetInfo.widgetStyle.shadows[0].offsetY,
+        ),
+      )
+    ];
   }
 
   Text _buildButtonText(WidgetInfo widgetInfo) {
     return Text(
-      widgetInfo.buttonInfo!.buttonText,
+      widgetInfo.textInfo!.content.text,
       style: TextStyle(
         color: Color.fromRGBO(
-          widgetInfo.widgetStyle.color.r,
-          widgetInfo.widgetStyle.color.g,
-          widgetInfo.widgetStyle.color.b,
-          widgetInfo.widgetStyle.color.opacity,
+          widgetInfo.textInfo!.style.color.r,
+          widgetInfo.textInfo!.style.color.g,
+          widgetInfo.textInfo!.style.color.b,
+          1,
         ),
         fontSize: widgetInfo.textInfo?.style.size ?? 14,
         fontWeight: FontWeight.values[5],

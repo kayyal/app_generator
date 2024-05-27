@@ -7,11 +7,9 @@ part 'button_info.g.dart';
 @JsonSerializable(explicitToJson: true)
 @CopyWith(copyWithNull: true)
 class ButtonInfo {
-  final String buttonText;
   final ButtonActionInfo action;
 
   ButtonInfo({
-    required this.buttonText,
     required this.action,
   });
 

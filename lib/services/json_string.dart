@@ -496,8 +496,16 @@ class JsonString {
           "shadows": [{"color": {"r": 0,"g": 123,"b": 234,"opacity": 1}, "offsetX": 2, "offsetY": 2, "blurRadius": 5, "spreadRadius": 1}]
         },
         "buttonInfo": {
-          "buttonText": "Click Me",
           "action": {"onPressed": "handleClick"}
+        },
+        "textInfo": {
+          "content": { "text": "Button !"},
+          "style": {
+            "color": {"r": 125, "g": 34, "b": 55 },
+            "size": 14.0,
+            "weight": 700,
+            "underline": true
+          }
         }
       }
     ]
