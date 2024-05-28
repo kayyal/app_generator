@@ -14,10 +14,12 @@ import 'package:gold_cherry_app_generator/widget_type.dart';
 class WidgetBuilderr extends GetxController {
   final AlignmentCalculator alignmentCalculator = Get.find();
   final DecorationBuilder decorationBuilder = Get.find();
-  final PositionCalculator positionCalculator = Get.find();
+  final PositionCalculator positionCalculator;
   final SizeCalculator sizeCalculator = Get.find();
   final TextBuilder textBuilder = Get.find();
   ButtonBuilder buttonBuilder = Get.find();
+
+  WidgetBuilderr({required this.positionCalculator});
 
   List<Widget> createFlutterWidgets(
       List<WidgetInfo> widgetInfos, BuildContext context) {

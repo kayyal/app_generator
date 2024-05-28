@@ -11,13 +11,13 @@ import 'package:gold_cherry_app_generator/utils/text_builder.dart';
 import 'package:gold_cherry_app_generator/utils/widget_builder.dart';
 
 void main() {
-  Get.put(ButtonBuilder());
+  Get.put(ButtonBuilder(positionCalculator: PositionCalculator()));
   Get.put(WidgetParser());
   Get.put(AlignmentCalculator());
   Get.put(DecorationBuilder());
-  Get.put(PositionCalculator());
+  // Get.put(PositionCalculator());
   Get.put(SizeCalculator());
   Get.put(TextBuilder());
-  Get.put(WidgetBuilderr());
+  Get.put(WidgetBuilderr(positionCalculator: PositionCalculator()));
   runApp(MainScreen());
 }

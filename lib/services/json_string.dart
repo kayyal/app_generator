@@ -475,7 +475,8 @@ class JsonString {
           "width": 0.2,
           "padding": {}
         },
-        "widgetStyle": {"color": {"r": 0, "g": 255,"b": 0,"opacity": 1},
+        "widgetStyle": {
+          "color": {"r": 0, "g": 255,"b": 0,"opacity": 1},
           "corner": {},
           "shadows": []
         }
@@ -484,8 +485,8 @@ class JsonString {
         "key": "widgetButton1",
         "widgetType": "button",
         "widgetLayout": {
-          "dx": 0.05,
-          "dy": 0.05,
+          "dx": 0.2,
+          "dy": 0.1,
           "height": 0.1,
           "width": 0.2,
           "padding": {"left": 10, "top": 10, "right": 10, "bottom": 10}
@@ -496,7 +497,13 @@ class JsonString {
           "shadows": [{"color": {"r": 0,"g": 123,"b": 234,"opacity": 1}, "offsetX": 2, "offsetY": 2, "blurRadius": 5, "spreadRadius": 1}]
         },
         "buttonInfo": {
-          "action": {"onPressed": "handleClick"}
+          "action": {"onPressed": "handleClick"},
+          "colorStyle":{
+              "focusedColor": {"r": 0, "g": 0, "b": 255, "opacity": 0.8},
+              "hoveredColor": {"r": 0, "g": 255, "b": 0, "opacity": 0.6},
+              "pressedColor": {"r": 255, "g": 0, "b": 0, "opacity": 0.4}
+          }
+          
         },
         "textInfo": {
           "content": { "text": "Button !"},
