@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gold_cherry_app_generator/button/button_info.dart';
 import 'package:gold_cherry_app_generator/button/button_rgb_color.dart';
+import 'package:gold_cherry_app_generator/utils/decoration_builder.dart';
 import 'package:gold_cherry_app_generator/utils/position_calculator.dart';
+import 'package:gold_cherry_app_generator/utils/widget_utils.dart';
 import 'package:gold_cherry_app_generator/widget/widget_info.dart';
 
 class ButtonBuilder extends GetxController {
   final PositionCalculator positionCalculator;
+  final DecorationBuilder decorationBuilder;
+  // final WidgetUtils wdigetUtils;
 
-  ButtonBuilder({required this.positionCalculator});
+  ButtonBuilder(
+      {required this.positionCalculator, required this.decorationBuilder});
 
   Widget buildButton(WidgetInfo widgetInfo, BuildContext context) {
     if (widgetInfo.buttonInfo == null) {
@@ -21,28 +26,11 @@ class ButtonBuilder extends GetxController {
         onTap: _getOnPressedCallback(widgetInfo.buttonInfo!),
         overlayColor: _getOverlayColor(widgetInfo.buttonInfo!),
         child: Container(
-          decoration: _buildBoxDecoration(widgetInfo),
+          decoration: decorationBuilder.build(widgetInfo),
           padding: _getButtonPadding(widgetInfo),
           child: Center(child: _buildButtonText(widgetInfo)),
         ),
       ),
-    );
-  }
-
-  BoxDecoration _buildBoxDecoration(WidgetInfo widgetInfo) {
-    return BoxDecoration(
-      color: _getButtonColor(widgetInfo),
-      borderRadius: _getBorderRadius(widgetInfo),
-      boxShadow: _getBoxShadows(widgetInfo),
-    );
-  }
-
-  Color _getButtonColor(WidgetInfo widgetInfo) {
-    return Color.fromRGBO(
-      widgetInfo.widgetStyle.color.r,
-      widgetInfo.widgetStyle.color.g,
-      widgetInfo.widgetStyle.color.b,
-      widgetInfo.widgetStyle.color.opacity,
     );
   }
 
@@ -53,34 +41,6 @@ class ButtonBuilder extends GetxController {
       widgetInfo.widgetLayout.padding.right,
       widgetInfo.widgetLayout.padding.bottom,
     );
-  }
-
-  BorderRadius _getBorderRadius(WidgetInfo widgetInfo) {
-    return BorderRadius.only(
-      topRight: Radius.circular(widgetInfo.widgetStyle.corner.topRight),
-      topLeft: Radius.circular(widgetInfo.widgetStyle.corner.topLeft),
-      bottomRight: Radius.circular(widgetInfo.widgetStyle.corner.bottomRight),
-      bottomLeft: Radius.circular(widgetInfo.widgetStyle.corner.bottomLeft),
-    );
-  }
-
-  List<BoxShadow> _getBoxShadows(WidgetInfo widgetInfo) {
-    if (widgetInfo.widgetStyle.shadows.isEmpty) return [];
-    return [
-      BoxShadow(
-        color: Color.fromRGBO(
-          widgetInfo.widgetStyle.shadows[0].color.r,
-          widgetInfo.widgetStyle.shadows[0].color.g,
-          widgetInfo.widgetStyle.shadows[0].color.b,
-          widgetInfo.widgetStyle.shadows[0].color.opacity,
-        ),
-        blurRadius: widgetInfo.widgetStyle.shadows[0].blurRadius,
-        offset: Offset(
-          widgetInfo.widgetStyle.shadows[0].offsetX,
-          widgetInfo.widgetStyle.shadows[0].offsetY,
-        ),
-      )
-    ];
   }
 
   Text _buildButtonText(WidgetInfo widgetInfo) {

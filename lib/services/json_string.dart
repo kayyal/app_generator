@@ -487,13 +487,13 @@ class JsonString {
         "widgetLayout": {
           "dx": 0.2,
           "dy": 0.1,
-          "height": 0.1,
-          "width": 0.2,
-          "padding": {"left": 10, "top": 10, "right": 10, "bottom": 10}
+          "height": 0.5,
+          "width": 0.5,
+          "padding": {"left": 5, "top": 5, "right": 5, "bottom": 5}
         },
         "widgetStyle": {
           "color": {"r": 33,"g": 123,"b": 255,"opacity": 0.45},
-          "corner": {"topRight": 8, "topLeft": 8, "bottomRight": 8, "bottomLeft": 8},
+          "corner": {"topRight": 5, "topLeft": 5, "bottomRight": 5, "bottomLeft": 5},
           "shadows": [{"color": {"r": 0,"g": 123,"b": 234,"opacity": 1}, "offsetX": 2, "offsetY": 2, "blurRadius": 5, "spreadRadius": 1}]
         },
         "buttonInfo": {
