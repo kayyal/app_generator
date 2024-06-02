@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:gold_cherry_app_generator/button/button_info.dart';
 import 'package:gold_cherry_app_generator/utils/button_builder.dart';
 import 'package:gold_cherry_app_generator/utils/text_builder.dart';
+import 'package:gold_cherry_app_generator/utils/widget_utils.dart';
 import 'package:gold_cherry_app_generator/widget/widget_info.dart';
 import 'package:gold_cherry_app_generator/utils/position_calculator.dart';
 import 'package:gold_cherry_app_generator/utils/decoration_builder.dart';
@@ -18,8 +19,9 @@ class WidgetBuilderr extends GetxController {
   final SizeCalculator sizeCalculator = Get.find();
   final TextBuilder textBuilder = Get.find();
   ButtonBuilder buttonBuilder = Get.find();
+  final WidgetUtils widgetUtils;
 
-  WidgetBuilderr({required this.positionCalculator});
+  WidgetBuilderr({required this.positionCalculator, required this.widgetUtils});
 
   List<Widget> createFlutterWidgets(
       List<WidgetInfo> widgetInfos, BuildContext context) {
@@ -58,6 +60,7 @@ class WidgetBuilderr extends GetxController {
 
   Container _buildContainer(WidgetInfo widgetInfo, BuildContext context) {
     return Container(
+      padding: widgetUtils.getButtonPadding(widgetInfo),
       width: sizeCalculator.calculateWidth(widgetInfo, context),
       height: sizeCalculator.calculateHeight(widgetInfo, context),
       alignment: alignmentCalculator.calculate(widgetInfo),
