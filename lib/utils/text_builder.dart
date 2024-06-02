@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gold_cherry_app_generator/text/text_info.dart';
-import 'package:gold_cherry_app_generator/text/text_style_info.dart';
 import 'package:get/get.dart';
 
 class TextBuilder extends GetxController {
-  Widget buildTextWidget(TextInfo? textInfo) {
+  Text buildTextWidget(TextInfo? textInfo) {
     if (textInfo != null) {
       return Text(
         textInfo.content.text,
@@ -15,7 +14,7 @@ class TextBuilder extends GetxController {
             textInfo.style.color.b,
             1.0,
           ),
-          fontSize: textInfo.style.size,
+          fontSize: textInfo?.style.size ?? 14,
           fontWeight: calculateFontWeight(textInfo.style.weight),
           decoration: textInfo.style.underline
               ? TextDecoration.underline
@@ -24,6 +23,28 @@ class TextBuilder extends GetxController {
       );
     } else {
       return Text('No text information provided');
+    }
+  }
+
+  FontWeight calculateFontWeight(double weight) {
+    if (weight <= 100) {
+      return FontWeight.w100;
+    } else if (weight <= 200) {
+      return FontWeight.w200;
+    } else if (weight <= 300) {
+      return FontWeight.w300;
+    } else if (weight <= 400) {
+      return FontWeight.w400;
+    } else if (weight <= 500) {
+      return FontWeight.w500;
+    } else if (weight <= 600) {
+      return FontWeight.w600;
+    } else if (weight <= 700) {
+      return FontWeight.w700;
+    } else if (weight <= 800) {
+      return FontWeight.w800;
+    } else {
+      return FontWeight.w900;
     }
   }
 }

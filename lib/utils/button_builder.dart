@@ -4,16 +4,22 @@ import 'package:gold_cherry_app_generator/button/button_info.dart';
 import 'package:gold_cherry_app_generator/button/button_rgb_color.dart';
 import 'package:gold_cherry_app_generator/utils/decoration_builder.dart';
 import 'package:gold_cherry_app_generator/utils/position_calculator.dart';
+import 'package:gold_cherry_app_generator/utils/text_builder.dart';
 import 'package:gold_cherry_app_generator/utils/widget_utils.dart';
 import 'package:gold_cherry_app_generator/widget/widget_info.dart';
 
 class ButtonBuilder extends GetxController {
   final PositionCalculator positionCalculator;
   final DecorationBuilder decorationBuilder;
-  // final WidgetUtils wdigetUtils;
+  final WidgetUtils widgetUtils;
+  final TextBuilder textBuilder;
 
-  ButtonBuilder(
-      {required this.positionCalculator, required this.decorationBuilder});
+  ButtonBuilder({
+    required this.positionCalculator,
+    required this.decorationBuilder,
+    required this.widgetUtils,
+    required this.textBuilder,
+  });
 
   Widget buildButton(WidgetInfo widgetInfo, BuildContext context) {
     if (widgetInfo.buttonInfo == null) {
@@ -27,34 +33,10 @@ class ButtonBuilder extends GetxController {
         overlayColor: _getOverlayColor(widgetInfo.buttonInfo!),
         child: Container(
           decoration: decorationBuilder.build(widgetInfo),
-          padding: _getButtonPadding(widgetInfo),
-          child: Center(child: _buildButtonText(widgetInfo)),
+          padding: widgetUtils.getButtonPadding(widgetInfo),
+          child:
+              Center(child: textBuilder.buildTextWidget(widgetInfo.textInfo)),
         ),
-      ),
-    );
-  }
-
-  EdgeInsets _getButtonPadding(WidgetInfo widgetInfo) {
-    return EdgeInsets.fromLTRB(
-      widgetInfo.widgetLayout.padding.left,
-      widgetInfo.widgetLayout.padding.top,
-      widgetInfo.widgetLayout.padding.right,
-      widgetInfo.widgetLayout.padding.bottom,
-    );
-  }
-
-  Text _buildButtonText(WidgetInfo widgetInfo) {
-    return Text(
-      widgetInfo.textInfo!.content.text,
-      style: TextStyle(
-        color: Color.fromRGBO(
-          widgetInfo.textInfo!.style.color.r,
-          widgetInfo.textInfo!.style.color.g,
-          widgetInfo.textInfo!.style.color.b,
-          1,
-        ),
-        fontSize: widgetInfo.textInfo?.style.size ?? 14,
-        fontWeight: FontWeight.values[5],
       ),
     );
   }
@@ -71,14 +53,14 @@ class ButtonBuilder extends GetxController {
   MaterialStateProperty<Color?> _getOverlayColor(ButtonInfo buttonInfo) {
     return MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.pressed)) {
-        return _getOverlayColorValue(
-            buttonInfo.colorStyle.pressedColor, Colors.black.withOpacity(0.1));
+        return _getOverlayColorValue(buttonInfo.colorStyle.pressedColor,
+            const Color.fromARGB(255, 170, 62, 62).withOpacity(0.1));
       } else if (states.contains(MaterialState.hovered)) {
         return _getOverlayColorValue(
             buttonInfo.colorStyle.hoveredColor, Colors.grey.withOpacity(0.1));
       } else if (states.contains(MaterialState.focused)) {
-        return _getOverlayColorValue(
-            buttonInfo.colorStyle.focusedColor, Colors.blue.withOpacity(0.1));
+        return _getOverlayColorValue(buttonInfo.colorStyle.focusedColor,
+            const Color.fromARGB(255, 73, 123, 163).withOpacity(0.1));
       }
       return null; // No overlay color for other states.
     });
